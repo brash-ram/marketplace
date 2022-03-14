@@ -1,7 +1,7 @@
-package com.boots.controller;
+package com.project.controller;
 
-import com.boots.entity.User;
-import com.boots.service.UserService;
+import com.project.entity.User;
+import com.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
