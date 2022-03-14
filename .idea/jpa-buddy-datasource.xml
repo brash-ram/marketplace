@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JpbDataSourceConfig">
+    <data-sources>
+      <data-source id="6c154c92-1704-485f-9a75-df5051831395" name="spring-reg-auth" url="jdbc:h2:file:./src/main/resources/spring" driverClass="org.h2.Driver" />
+    </data-sources>
+  </component>
+</project>
