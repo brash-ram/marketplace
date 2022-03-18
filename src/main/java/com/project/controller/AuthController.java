@@ -1,15 +1,11 @@
 package com.project.controller;
 
-import com.project.entity.User;
 import com.project.service.UserService;
 import com.project.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
 
 @RestController
 public class AuthController {
@@ -18,13 +14,13 @@ public class AuthController {
 	private UserService userService;
 
 	@PostMapping("/registration")
-	public ResponseUser addUser(@RequestBody RequestRegistration userForm) {
+	public ResponseUserDTO addUser(@RequestBody RequestRegistrationDTO userForm) {
 		return userService.saveUser(userForm);
 
 	}
 
 	@PostMapping("/login")
-	public ResponseUser loadUser(@RequestBody RequestAuthorization userForm) {
+	public ResponseUserDTO loadUser( RequestAuthorizationDTO userForm) {
 		return userService.loadUser(userForm);
 	}
 }

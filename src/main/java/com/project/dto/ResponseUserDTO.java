@@ -1,7 +1,7 @@
 package com.project.dto;
 
-public class ResponseUser {
-    public ResponseUser(Long id, String email, String username, String fio, String message) {
+public class ResponseUserDTO {
+    public ResponseUserDTO(Long id, String email, String username, String fio, String message) {
         this.id = id;
         this.email = email;
         this.username = username;

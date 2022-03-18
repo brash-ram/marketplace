@@ -1,8 +1,8 @@
 package com.project.dto;
 
-public class RequestRegistration {
+public class RequestRegistrationDTO {
 
-    public RequestRegistration(String email, String username, String password, String fio) {
+    public RequestRegistrationDTO(String email, String username, String password, String fio) {
         this.email = email;
         this.username = username;
         this.password = password;

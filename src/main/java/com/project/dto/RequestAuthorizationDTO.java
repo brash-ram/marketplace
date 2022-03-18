@@ -1,8 +1,8 @@
 package com.project.dto;
 
-public class RequestAuthorization {
+public class RequestAuthorizationDTO {
 
-    public RequestAuthorization(String username, String password) {
+    public RequestAuthorizationDTO(String username, String password) {
         this.username = username;
         this.password = password;
     }

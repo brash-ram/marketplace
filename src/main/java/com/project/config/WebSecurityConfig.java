@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -29,13 +31,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     //Доступ только для не зарегистрированных пользователей
                     .antMatchers("/registration").not().fullyAuthenticated()
-                    .antMatchers("/news").hasRole("USER")
-//                    Доступ разрешен всем пользователей
-                    .antMatchers("/", "/resources/**").permitAll()
-                    .antMatchers("/", "/login").permitAll()
-//                Все остальные страницы требуют аутентификации
+                    //Доступ разрешен всем пользователей
+                    .antMatchers("/", "/**").permitAll()
+                    //Все остальные страницы требуют аутентификации
                 .anyRequest().authenticated()
-//                .and()
+//                    .and()
 //                    //Настройка для входа в систему
 //                    .formLogin()
 //                    .loginPage("/login")
@@ -51,5 +51,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
+//        auth.inMemoryAuthentication()
+//                .withUser("admin")
+//                .password("admin")
+//                .roles("USER");
     }
+//    /** {@inheritDoc} */
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth)
+//            throws Exception {
+//        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+//        auth.inMemoryAuthentication()
+//                .withUser("user").password(encoder.encode("user"))
+//                .authorities("user").and()
+//                .withUser("superuser").password(encoder.encode("superuser"))
+//                .authorities("user", "superuser").and()
+//                .withUser("admin").password(encoder.encode("admin"))
+//                .authorities("user", "admin");
+//    }
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.
+//                httpBasic()
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers("/**").hasAnyAuthority()
+//                .and()
+//                .formLogin();
+//    }
 }

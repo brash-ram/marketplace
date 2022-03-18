@@ -33,14 +33,14 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public ResponseUser loadUser(RequestAuthorization userForm) {
+    public ResponseUserDTO loadUser(RequestAuthorizationDTO userForm) {
         User user = userRepository.findByUsername(userForm.getUsername());
 
-        ResponseUser response = new ResponseUser(null, null, null, null,
+        ResponseUserDTO response = new ResponseUserDTO(null, null, null, null,
                 "userNotFound");
         if (user != null) {
             if (bCryptPasswordEncoder.matches(userForm.getPassword(), user.getPassword())) {
-                response = new ResponseUser(user.getId(), user.getEmail(), user.getUsername(), user.getFio(),
+                response = new ResponseUserDTO(user.getId(), user.getEmail(), user.getUsername(), user.getFio(),
                         "authorizationSuccessful");
             }
         }
@@ -48,10 +48,10 @@ public class UserService implements UserDetailsService {
         return response;
     }
 
-    public ResponseUser saveUser(RequestRegistration userForm) {
+    public ResponseUserDTO saveUser(RequestRegistrationDTO userForm) {
         roleRepository.save(new Role(1L, "ROLE_USER"));
         User userFromDB = userRepository.findByUsername(userForm.getUsername());
-        ResponseUser response = new ResponseUser(null, null, null, null,
+        ResponseUserDTO response = new ResponseUserDTO(null, null, null, null,
                 "userFound");
 
         if (userFromDB == null) {
@@ -64,7 +64,7 @@ public class UserService implements UserDetailsService {
             userRepository.save(user);
 
             User loadUser = userRepository.findByUsername(userForm.getUsername());
-            response = new ResponseUser(loadUser.getId(), userForm.getEmail(), userForm.getUsername(), userForm.getFio(),
+            response = new ResponseUserDTO(loadUser.getId(), userForm.getEmail(), userForm.getUsername(), userForm.getFio(),
                     "registrationSuccessful");
         }
         return response;
