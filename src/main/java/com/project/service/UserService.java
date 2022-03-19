@@ -60,7 +60,7 @@ public class UserService implements UserDetailsService {
             user.setEmail(userForm.getEmail());
             user.setFio(userForm.getFio());
             user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
-            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            user.setPassword(bCryptPasswordEncoder.encode(userForm.getPassword()));
             userRepository.save(user);
 
             User loadUser = userRepository.findByUsername(userForm.getUsername());

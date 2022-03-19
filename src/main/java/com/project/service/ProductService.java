@@ -19,15 +19,26 @@ public class ProductService {
 	@Autowired
 	UserRepository userRepository;
 
+	private int getEndIndex(RequestPageProductsDTO page, int sizeProducts) {
+		int index = (page.getPage() - 1) * page.getSize() + page.getSize();
+		return Math.min(index, sizeProducts);
+	}
+
 	public ResponsePageProductDTO loadPage(RequestPageProductsDTO page){
 		List<Product> products = productRepository.findAll();
 		List<LowFieldProductDTO> lowFieldProducts = new ArrayList<>();
 
-		for (Product product : products.subList( page.getPage(), (page.getPage()+page.getSize())) ){
-			lowFieldProducts.add(new LowFieldProductDTO(product.getName(), product.getPrice()));
+		if ((long) (page.getPage() - 1) * page.getSize() < products.size()) {
+			int endIndex = getEndIndex(page, products.size());
+			for (Product product : products.subList((page.getPage() - 1) * page.getSize(), endIndex)) {
+				lowFieldProducts.add(new LowFieldProductDTO(product.getName(), product.getPrice()));
+			}
+			return new ResponsePageProductDTO(page.getPage(), page.getSize(),
+					page.getCategory(), lowFieldProducts);
 		}
-		return new ResponsePageProductDTO(page.getPage(), page.getSize(),
-				page.getCategory(), lowFieldProducts);
+		else {
+			return null;
+		}
 	}
 
 	public ProductDTO loadProduct(long idProduct) {

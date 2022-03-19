@@ -14,13 +14,13 @@ public class AuthController {
 	private UserService userService;
 
 	@PostMapping("/registration")
-	public ResponseUserDTO addUser(@RequestBody RequestRegistrationDTO userForm) {
+	public ResponseUserDTO addUser( RequestRegistrationDTO userForm) {
 		return userService.saveUser(userForm);
 
 	}
 
-	@PostMapping("/login")
-	public ResponseUserDTO loadUser( RequestAuthorizationDTO userForm) {
-		return userService.loadUser(userForm);
-	}
+//	@PostMapping("/login")
+//	public ResponseUserDTO loadUser( RequestAuthorizationDTO userForm) {
+//		return userService.loadUser(userForm);
+//	}
 }

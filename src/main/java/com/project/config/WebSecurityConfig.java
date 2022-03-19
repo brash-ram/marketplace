@@ -32,20 +32,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     //Доступ только для не зарегистрированных пользователей
                     .antMatchers("/registration").not().fullyAuthenticated()
                     //Доступ разрешен всем пользователей
-                    .antMatchers("/", "/**").permitAll()
-                    //Все остальные страницы требуют аутентификации
+//                    .antMatchers("/", "/catalog").hasRole("USER")
+//                    .antMatchers("/", "/product").hasRole("USER")
+//                    .antMatchers("/", "/**").permitAll()
+//                    Все остальные страницы требуют аутентификации
                 .anyRequest().authenticated()
-//                    .and()
+                    .and()
 //                    //Настройка для входа в систему
-//                    .formLogin()
+                    .formLogin()
 //                    .loginPage("/login")
 //                    //Перенарпавление на главную страницу после успешного входа
-//                    .defaultSuccessUrl("/")
-//                    .permitAll()
+                    .defaultSuccessUrl("/login")
+                    .permitAll()
                 .and()
                     .logout()
+                    .logoutUrl("/logout")
                     .permitAll()
-                    .logoutSuccessUrl("/");
+                    .logoutSuccessUrl("/logout");
     }
 
     @Autowired
