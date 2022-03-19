@@ -1,9 +1,7 @@
 package com.project.dto;
-import java.util.List;
 
 public class ProductDTO {
 
-	private long id;
 	private String category;
 	private String name;
 	private String description;
@@ -12,22 +10,13 @@ public class ProductDTO {
 	private String sellerFio;
 	private String email;
 
-	public ProductDTO(long id, String category, String name, String description, long price, String sellerFio, String email) {
-		this.id = id;
+	public ProductDTO(String category, String name, String description, long price, String sellerFio, String email) {
 		this.category = category;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.sellerFio = sellerFio;
 		this.email = email;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public String getCategory() {

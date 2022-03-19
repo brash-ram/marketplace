@@ -36,11 +36,11 @@ public class UserService implements UserDetailsService {
     public ResponseUserDTO loadUser(RequestAuthorizationDTO userForm) {
         User user = userRepository.findByUsername(userForm.getUsername());
 
-        ResponseUserDTO response = new ResponseUserDTO(null, null, null, null,
+        ResponseUserDTO response = new ResponseUserDTO(null, null,
                 "userNotFound");
         if (user != null) {
             if (bCryptPasswordEncoder.matches(userForm.getPassword(), user.getPassword())) {
-                response = new ResponseUserDTO(user.getId(), user.getEmail(), user.getUsername(), user.getFio(),
+                response = new ResponseUserDTO(user.getEmail(), user.getFio(),
                         "authorizationSuccessful");
             }
         }
@@ -51,7 +51,7 @@ public class UserService implements UserDetailsService {
     public ResponseUserDTO saveUser(RequestRegistrationDTO userForm) {
         roleRepository.save(new Role(1L, "ROLE_USER"));
         User userFromDB = userRepository.findByUsername(userForm.getUsername());
-        ResponseUserDTO response = new ResponseUserDTO(null, null, null, null,
+        ResponseUserDTO response = new ResponseUserDTO(null, null,
                 "userFound");
 
         if (userFromDB == null) {
@@ -64,7 +64,7 @@ public class UserService implements UserDetailsService {
             userRepository.save(user);
 
             User loadUser = userRepository.findByUsername(userForm.getUsername());
-            response = new ResponseUserDTO(loadUser.getId(), userForm.getEmail(), userForm.getUsername(), userForm.getFio(),
+            response = new ResponseUserDTO(userForm.getEmail(), userForm.getFio(),
                     "registrationSuccessful");
         }
         return response;

@@ -6,6 +6,8 @@ import com.project.dto.ProductDTO;
 import com.project.entity.Product;
 import com.project.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,7 +27,7 @@ public class ProductController {
 	}
 
 	@PostMapping("/addProduct")
-	public boolean addProduct( Product product) {
-		return productService.addProduct(product);
+	public boolean addProduct( Product product, Authentication authentication) {
+		return productService.addProduct(product, (UserDetails) authentication.getPrincipal());
 	}
 }
