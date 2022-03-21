@@ -14,7 +14,7 @@ public class AuthController {
 	private UserService userService;
 
 	@PostMapping("/registration")
-	public ResponseUserDTO addUser( RequestRegistrationDTO userForm) {
+	public ResponseUserDTO addUser(@RequestBody RequestRegistrationDTO userForm) {
 		return userService.saveUser(userForm);
 
 	}

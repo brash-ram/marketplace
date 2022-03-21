@@ -9,6 +9,9 @@ public class RequestRegistrationDTO {
         this.fio = fio;
     }
 
+    public RequestRegistrationDTO() {
+    }
+
     private String email;
     private String username;
     private String password;

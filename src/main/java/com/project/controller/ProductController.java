@@ -17,7 +17,7 @@ public class ProductController {
 	ProductService productService;
 
 	@PostMapping("/catalog")
-	public ResponsePageProductDTO getPage( RequestPageProductsDTO page) {
+	public ResponsePageProductDTO getPage(@RequestBody RequestPageProductsDTO page) {
 		return productService.loadPage(page);
 	}
 
@@ -27,7 +27,7 @@ public class ProductController {
 	}
 
 	@PostMapping("/addProduct")
-	public boolean addProduct( Product product, Authentication authentication) {
+	public boolean addProduct(@RequestBody Product product, Authentication authentication) {
 		return productService.addProduct(product, (UserDetails) authentication.getPrincipal());
 	}
 }
